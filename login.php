@@ -1,0 +1,4 @@
+<?php session_start(); require_once 'includes/db_connect.php'; include 'includes/header_footer.php'; $err=''; if($_SERVER['REQUEST_METHOD']==='POST'){ $email=$mysqli->real_escape_string($_POST['email']); $pass=$_POST['password']??''; $res=$mysqli->query("SELECT id,password,is_admin FROM users WHERE email='$email' LIMIT 1"); if($res && $row=$res->fetch_assoc()){ if(password_verify($pass,$row['password'])){ $_SESSION['user_id']=$row['id']; $_SESSION['is_admin']=$row['is_admin']; header('Location:/dashboard.php'); exit; } else $err='Nesprávne heslo.'; } else $err='Účet neexistuje.'; } ?>
+<h2>Prihlásenie</h2><?php if($err) echo '<p class="error">'.h($err).'</p>'; ?>
+<form method="post"><input name="email" placeholder="E-mail" required><input name="password" type="password" placeholder="Heslo" required><button class="btn-primary">Prihlásiť</button></form>
+<?php include 'includes/footer_bottom.php'; ?>
