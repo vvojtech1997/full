@@ -1,0 +1,1 @@
+<?php session_start(); require_once __DIR__.'/../includes/db_connect.php'; if(empty($_SESSION['is_admin'])) header('Location:/login.php'); include __DIR__.'/../includes/../includes/header_footer.php'; echo '<h2>Admin</h2><ul><li><a href="/admin/users.php">Users</a></li><li><a href="/admin/settings.php">Settings</a></li></ul>'; include __DIR__.'/../includes/footer_bottom.php'; ?>
